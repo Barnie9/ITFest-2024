@@ -9,7 +9,7 @@ public static class AddRepositoryExtensions
         services
             .AddTransient<IRoleRepository, RoleRepository>()
             .AddTransient<IUserRepository, UserRepository>()
-            .AddTransient<ICourseRepository, CourseRepository>()
+            .AddTransient<ILearningCourseRepository, LearningCourseRepository>()
             .AddTransient<ITagRepository, TagRepository>()
             .AddTransient<ILessonRepository, LessonRepository>()
             .AddTransient<IBadgeRepository, BadgeRepository>();

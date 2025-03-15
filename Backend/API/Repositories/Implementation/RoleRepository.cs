@@ -8,6 +8,6 @@ public class RoleRepository(PostgresDbContext context) : IRoleRepository
 {
     public async Task<Role?> GetByNameAsync(string roleName)
     {
-        return await context.Roles.FirstOrDefaultAsync(r => r.NormalizedName == roleName.ToUpper());
+        return await context.Roles.FirstOrDefaultAsync(r => r.Name.ToLower().Equals(roleName.ToLower()));
     }
 }

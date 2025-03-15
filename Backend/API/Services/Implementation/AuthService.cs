@@ -17,7 +17,6 @@ public class AuthService(IUserRepository userRepository) : IAuthService
             new Role
             {
                 Name = "User",
-                NormalizedName = "USER"
             }
         ];
 

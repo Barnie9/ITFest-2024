@@ -3,6 +3,7 @@ import LayoutPage from "./pages/LayoutPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import TestPage from "./pages/TestPage.tsx";
 import { AuthContextProvider } from "./context/AuthContext.tsx";
+import { TestContextProvider } from "./context/TestContext.tsx";
 
 function App() {
 	return (
@@ -27,9 +28,9 @@ function App() {
 				<Route
 					path={"/test"}
 					element={
-						<AuthContextProvider>
+						<TestContextProvider>
 							<TestPage />
-						</AuthContextProvider>
+						</TestContextProvider>
 					}
 				/>
 			</Routes>

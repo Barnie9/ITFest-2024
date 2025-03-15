@@ -1,6 +1,6 @@
 ﻿namespace API.Constants;
 
-public static class Levels
+public class Levels
 {
     public static string Beginner = "Beginner";
     public static string Intermediate = "Intermediate";

@@ -8,6 +8,6 @@ export type RegisterModel = {
 };
 
 export type LoginModel = {
-    usernameOrEmail: string;
-    password: string;
+	usernameOrEmail: string;
+	password: string;
 };

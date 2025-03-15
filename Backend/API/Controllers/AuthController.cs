@@ -14,24 +14,17 @@ public class AuthController(
     ) : ControllerBase
 {
     [HttpGet("username/{username}")]
-    public async Task<ActionResult<bool>> CheckUsername([FromRoute] string username)
-    {
-        return Ok(await userRepository.CheckIfUsernameExistsAsync(username));
-    }
+    public async Task<ActionResult<bool>> CheckUsername([FromRoute] string username) =>
+        Ok(await userRepository.CheckIfUsernameExistsAsync(username));
 
     [HttpGet("email/{email}")]
-    public async Task<ActionResult<bool>> CheckEmail([FromRoute] string email)
-    {
-        return Ok(await userRepository.CheckIfEmailExistsAsync(email));
-    }
+    public async Task<ActionResult<bool>> CheckEmail([FromRoute] string email) =>
+        Ok(await userRepository.CheckIfEmailExistsAsync(email));
+
 
     [HttpPost("register")]
-    public async Task<ActionResult<bool>> Register([FromBody] RegisterModel registerModel)
-    {
-        Console.WriteLine(registerModel.Username);
-
-        return Ok(await authService.RegisterAsync(registerModel));
-    }
+    public async Task<ActionResult<bool>> Register([FromBody] RegisterModel registerModel) =>
+        Ok(await authService.RegisterAsync(registerModel));
 
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponseModel>> Login([FromBody] LoginModel loginModel)

@@ -7,28 +7,34 @@ public class PostgresDbContext(DbContextOptions<PostgresDbContext> options) : Db
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserBadge>()
-            .HasKey(ub => new { ub.UserId, ub.BadgeId });
+        // Primary Keys
+        modelBuilder.Entity<UserChapter>()
+            .HasKey(uc => new { uc.UserId, uc.ChapterId });
 
         modelBuilder.Entity<UserLesson>()
             .HasKey(ul => new { ul.UserId, ul.LessonId });
 
-        modelBuilder.Entity<UserCourse>()
+        modelBuilder.Entity<UserLearningCourse>()
             .HasKey(uc => new { uc.UserId, uc.CourseId });
 
+        // Foreign Keys
         modelBuilder.Entity<User>()
             .HasMany<Role>(u => u.Roles)
             .WithMany(r => r.Users);
 
-        modelBuilder.Entity<Course>()
-            .HasMany<Tag>(c => c.Tags)
-            .WithMany(t => t.Courses);
+        modelBuilder.Entity<User>()
+            .HasMany<Badge>(u => u.Badges)
+            .WithMany();
 
-        modelBuilder.Entity<Course>()
-            .HasMany<Lesson>(c => c.Lessons)
-            .WithOne(l => l.Course);
+        modelBuilder.Entity<LearningCourse>()
+            .HasMany<Tag>(l => l.Tags)
+            .WithMany(t => t.LearningCourses);
 
-        modelBuilder.Entity<Course>()
+        modelBuilder.Entity<LearningCourse>()
+            .HasMany<Lesson>(l => l.Lessons)
+            .WithOne(l => l.LearningCourse);
+
+        modelBuilder.Entity<LearningCourse>()
             .HasOne<Badge>(c => c.Badge)
             .WithOne();
 
@@ -44,19 +50,15 @@ public class PostgresDbContext(DbContextOptions<PostgresDbContext> options) : Db
             .HasOne<QuizForm>(c => c.Form)
             .WithOne();
 
-        modelBuilder.Entity<Badge>()
-            .Property(b => b.Image)
-            .HasColumnType("bytea");
-
-        modelBuilder.Entity<UserBadge>()
-            .HasOne<User>(ub => ub.User)
+        modelBuilder.Entity<UserChapter>()
+            .HasOne<User>(uc => uc.User)
             .WithMany()
-            .HasForeignKey(ub => ub.UserId);
+            .HasForeignKey(uc => uc.UserId);
 
-        modelBuilder.Entity<UserBadge>()
-            .HasOne<Badge>(ub => ub.Badge)
+        modelBuilder.Entity<UserChapter>()
+            .HasOne<Chapter>(uc => uc.Chapter)
             .WithMany()
-            .HasForeignKey(ub => ub.BadgeId);
+            .HasForeignKey(uc => uc.ChapterId);
 
         modelBuilder.Entity<UserLesson>()
             .HasOne<User>(ul => ul.User)
@@ -68,13 +70,13 @@ public class PostgresDbContext(DbContextOptions<PostgresDbContext> options) : Db
             .WithMany()
             .HasForeignKey(ul => ul.LessonId);
 
-        modelBuilder.Entity<UserCourse>()
-            .HasOne<User>(uc => uc.User)
+        modelBuilder.Entity<UserLearningCourse>()
+            .HasOne<User>(ulc => ulc.User)
             .WithMany()
             .HasForeignKey(uc => uc.UserId);
 
-        modelBuilder.Entity<UserCourse>()
-            .HasOne<Course>(uc => uc.Course)
+        modelBuilder.Entity<UserLearningCourse>()
+            .HasOne<LearningCourse>(ulc => ulc.LearningCourse)
             .WithMany()
             .HasForeignKey(uc => uc.CourseId);
     }
@@ -83,9 +85,11 @@ public class PostgresDbContext(DbContextOptions<PostgresDbContext> options) : Db
     public DbSet<Role> Roles { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Badge> Badges { get; set; }
+    public DbSet<ChapterElement> ChapterElements { get; set; }
+    public DbSet<Chapter> Chapters { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
-    public DbSet<Course> Courses { get; set; }
-    public DbSet<UserBadge> UserBadges { get; set; }
+    public DbSet<LearningCourse> LearningCourses { get; set; }
+    public DbSet<UserChapter> UserChapters { get; set; }
     public DbSet<UserLesson> UserLessons { get; set; }
-    public DbSet<UserCourse> UserCourses { get; set; }
+    public DbSet<UserLearningCourse> UserLearningCourses { get; set; }
 }

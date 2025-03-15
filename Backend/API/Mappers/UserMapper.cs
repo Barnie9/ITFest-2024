@@ -8,20 +8,17 @@ namespace API.Mappers;
 
 public static class UserMapper
 {
-    public static UserModel MapUserEntityToUserModel(User user)
-    {
-        return new UserModel
+    public static UserModel MapUserEntityToUserModel(User user) =>
+        new UserModel()
         {
             Username = user.Username,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email
         };
-    }
 
-    public static User MapRegisterModelToUserEntity(RegisterModel registerModel)
-    {
-        return new User
+    public static User MapRegisterModelToUserEntity(RegisterModel registerModel) =>
+        new User()
         {
             Username = registerModel.Username,
             FirstName = registerModel.FirstName,
@@ -35,5 +32,4 @@ public static class UserMapper
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
         };
-    }
 }

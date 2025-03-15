@@ -22,4 +22,5 @@ public class User
     public DateTime UpdatedAt { get; set; }
 
     public List<Role> Roles { get; set; } = new();
+    public List<Badge> Badges { get; set; } = new();
 }

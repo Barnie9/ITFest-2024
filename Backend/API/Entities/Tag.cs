@@ -8,5 +8,5 @@ public class Tag
 
     [StringLength(128)] public string Name { get; set; } = string.Empty;
 
-    public List<Course> Courses { get; set; } = new();
+    public List<LearningCourse> LearningCourses { get; set; } = new();
 }
